@@ -25,9 +25,10 @@ import {
 } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { useToast } from "@/components/notitoast/useToast";
 
 const formSchema = z.object({
-  variant: z.enum(["success", "failure", "warning"]),
+  variant: z.enum(["success", "failure", "warning", "info"]),
   positionVertical: z.enum(["top", "bottom"]),
   positionHorizontal: z.enum(["left", "right", "center"]),
   message: z.string().min(1, "Message cannot be empty"),
@@ -40,12 +41,21 @@ export default function MainForm() {
       variant: "success",
       positionVertical: "top",
       positionHorizontal: "center",
-      message: "",
+      message: "Hey! Welcome to NotiStack 🍞",
     },
   });
 
+  const { addToast } = useToast();
+
   const onSubmit = (data) => {
-    console.log(data);
+    addToast({
+      variant: data.variant,
+      message: data.message,
+      position: {
+        vertical: data.positionVertical,
+        horizontal: data.positionHorizontal,
+      },
+    });
   };
 
   return (
@@ -88,6 +98,11 @@ export default function MainForm() {
                     />
                     <Label htmlFor="warning" id="warning">
                       Warning
+                    </Label>
+
+                    <RadioGroupItem id="info" value="info" label="Info" />
+                    <Label htmlFor="info" id="info">
+                      Informative
                     </Label>
                   </div>
                 </RadioGroup>
