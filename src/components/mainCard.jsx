@@ -1,15 +1,14 @@
-import { Plus } from "lucide-react";
+"use client";
 
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import MainForm from "./mainForm";
 
 export default function CardDemo({ className, ...props }) {
   return (
@@ -18,12 +17,9 @@ export default function CardDemo({ className, ...props }) {
         <CardTitle>NotiToast</CardTitle>
         <CardDescription>Create your notifications.</CardDescription>
       </CardHeader>
-      <CardContent className="grid gap-4"></CardContent>
-      <CardFooter>
-        <Button className="w-full">
-          <Plus /> Create Toast
-        </Button>
-      </CardFooter>
+      <CardContent className="grid gap-4">
+        <MainForm />
+      </CardContent>
     </Card>
   );
 }
