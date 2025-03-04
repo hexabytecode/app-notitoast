@@ -48,6 +48,7 @@ export default function MainForm() {
   const { addToast } = useToast();
 
   const onSubmit = (data) => {
+    console.log("data: ", data);
     addToast({
       variant: data.variant,
       message: data.message,
