@@ -1,5 +1,6 @@
 import Toast from "./Toast";
 import { getPositionClass } from "./toastUtils";
+import { AnimatePresence } from "framer-motion";
 
 const ToastContainer = ({ toasts, removeToast }) => {
   const groupedToasts = toasts.reduce((groups, toast) => {
@@ -21,15 +22,17 @@ const ToastContainer = ({ toasts, removeToast }) => {
               horizontal
             )}`}
           >
-            {groupedToasts.map((toast) => (
-              <Toast
-                key={toast.id}
-                variant={toast.variant}
-                message={toast.message}
-                position={toast.position}
-                onClose={() => removeToast(toast.id)}
-              />
-            ))}
+            <AnimatePresence>
+              {groupedToasts.map((toast) => (
+                <Toast
+                  key={toast.id}
+                  variant={toast.variant}
+                  message={toast.message}
+                  position={toast.position}
+                  onClose={() => removeToast(toast.id)}
+                />
+              ))}
+            </AnimatePresence>
           </div>
         );
       })}

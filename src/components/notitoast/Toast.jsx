@@ -4,7 +4,8 @@ import { getAnimation, getVariantClass } from "./toastUtils";
 
 const Toast = ({ variant, message, position, onClose }) => (
   <motion.div
-    className={`z-50 ${getVariantClass(
+    layout
+    className={`z-[1000] ${getVariantClass(
       variant
     )} p-4 rounded-lg shadow-lg flex items-center justify-between gap-4`}
     {...getAnimation(position)}
