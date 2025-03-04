@@ -7,6 +7,8 @@ This project implements a fully functional and customizable toast notification s
 - **Live Deployment:** [NotiToast 🍞](https://next-notistack.vercel.app/)
 - **Preview Video:** [Live Demo](https://github.com/user-attachments/assets/2b176bc4-0558-4b67-9e87-089276410fd2)
 
+![videoframe_3579](https://github.com/user-attachments/assets/285853ee-bbde-4307-a1f3-943433074572)
+
 ## Features
 
 - **Independent and Reusable:** The toast system is self-contained and can be used across multiple parts of the application without dependencies.
