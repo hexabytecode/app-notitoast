@@ -1,3 +1,5 @@
+import { CheckCircle, Info, AlertTriangle, XCircle } from "lucide-react";
+
 export const generateId = () => Date.now();
 
 export const getPositionClass = (vertical, horizontal) => {
@@ -15,15 +17,30 @@ export const getPositionClass = (vertical, horizontal) => {
 export const getVariantClass = (variant) => {
   switch (variant) {
     case "success":
-      return "bg-green-500 text-white";
+      return "border-green-500 text-green-700 bg-green-100";
     case "failure":
-      return "bg-red-500 text-white";
+      return "border-red-500 text-red-700 bg-red-100";
     case "warning":
-      return "bg-yellow-500 text-black";
+      return "border-yellow-500 text-yellow-700 bg-yellow-100";
     case "info":
-      return "bg-blue-500 text-white";
+      return "border-blue-500 text-blue-700 bg-blue-100";
     default:
-      return "bg-gray-500 text-white";
+      return "border-gray-500 text-gray-700 bg-gray-100";
+  }
+};
+
+export const getVariantIcon = (variant) => {
+  switch (variant) {
+    case "success":
+      return <CheckCircle className="text-green-500" />;
+    case "failure":
+      return <XCircle className="text-red-500" />;
+    case "warning":
+      return <AlertTriangle className="text-yellow-500" />;
+    case "info":
+      return <Info className="text-blue-500" />;
+    default:
+      return null;
   }
 };
 
