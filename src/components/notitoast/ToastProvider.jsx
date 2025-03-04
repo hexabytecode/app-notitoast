@@ -7,10 +7,14 @@ export const ToastContext = createContext();
 
 export const ToastProvider = ({ children }) => {
   const [toasts, setToasts] = useState([]);
+  const [maxNotifications, setMaxNotifications] = useState(5);
 
   const addToast = (toast) => {
     const id = Date.now();
-    setToasts((prevToasts) => [{ id, ...toast }, ...prevToasts]);
+    setToasts((prevToasts) => {
+      const updatedToasts = [{ id, ...toast }, ...prevToasts];
+      return updatedToasts.slice(0, maxNotifications);
+    });
 
     if (toast.duration) {
       setTimeout(() => {
@@ -24,7 +28,9 @@ export const ToastProvider = ({ children }) => {
   };
 
   return (
-    <ToastContext.Provider value={{ addToast, removeToast }}>
+    <ToastContext.Provider
+      value={{ addToast, removeToast, setMaxNotifications }}
+    >
       {children}
       <ToastContainer toasts={toasts} removeToast={removeToast} />
     </ToastContext.Provider>
