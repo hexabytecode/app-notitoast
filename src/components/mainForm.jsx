@@ -32,6 +32,7 @@ const formSchema = z.object({
   positionVertical: z.enum(["top", "bottom"]),
   positionHorizontal: z.enum(["left", "right", "center"]),
   message: z.string().min(1, "Message cannot be empty"),
+  duration: z.number().min(1).max(15),
 });
 
 export default function MainForm() {
@@ -42,6 +43,7 @@ export default function MainForm() {
       positionVertical: "top",
       positionHorizontal: "center",
       message: "Hey! Welcome to NotiStack 🍞",
+      duration: 5,
     },
   });
 
@@ -56,6 +58,7 @@ export default function MainForm() {
         vertical: data.positionVertical,
         horizontal: data.positionHorizontal,
       },
+      duration: data.duration,
     });
   };
 
@@ -141,7 +144,6 @@ export default function MainForm() {
               </FormItem>
             )}
           />
-
           <FormField
             control={form.control}
             name="positionHorizontal"
@@ -160,6 +162,35 @@ export default function MainForm() {
                       <SelectItem value="left">Left</SelectItem>
                       <SelectItem value="right">Right</SelectItem>
                       <SelectItem value="center">Center</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="duration"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Duration (seconds)</FormLabel>
+                <FormControl>
+                  <Select
+                    defaultValue={String(field.value)}
+                    onValueChange={(value) => field.onChange(Number(value))}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select duration" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {Array.from({ length: 15 }, (_, i) => i + 1).map(
+                        (second) => (
+                          <SelectItem key={second} value={String(second)}>
+                            {second} seconds
+                          </SelectItem>
+                        )
+                      )}
                     </SelectContent>
                   </Select>
                 </FormControl>
