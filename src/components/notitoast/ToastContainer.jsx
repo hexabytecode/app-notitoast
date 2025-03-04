@@ -37,6 +37,7 @@ const ToastContainer = ({ toasts, removeToast }) => {
                 key={toast.id}
                 variant={toast.variant}
                 message={toast.message}
+                position={toast.position}
                 onClose={() => removeToast(toast.id)}
               />
             ))}
