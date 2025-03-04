@@ -33,6 +33,7 @@ const formSchema = z.object({
   positionHorizontal: z.enum(["left", "right", "center"]),
   message: z.string().min(1, "Message cannot be empty"),
   duration: z.number().min(1).max(15),
+  maxNotifications: z.number().min(1).max(10),
 });
 
 export default function MainForm() {
@@ -44,13 +45,14 @@ export default function MainForm() {
       positionHorizontal: "center",
       message: "Hey! Welcome to NotiStack 🍞",
       duration: 5,
+      maxNotifications: 5,
     },
   });
 
-  const { addToast } = useToast();
+  const { addToast, setMaxNotifications } = useToast();
 
   const onSubmit = (data) => {
-    console.log("data: ", data);
+    setMaxNotifications(data.maxNotifications);
     addToast({
       variant: data.variant,
       message: data.message,
@@ -188,6 +190,38 @@ export default function MainForm() {
                         (second) => (
                           <SelectItem key={second} value={String(second)}>
                             {second} seconds
+                          </SelectItem>
+                        )
+                      )}
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
+        <div className="flex gap-8">
+          <FormField
+            control={form.control}
+            name="maxNotifications"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Max Notifications</FormLabel>
+                <FormControl>
+                  <Select
+                    defaultValue={String(field.value)}
+                    onValueChange={(value) => field.onChange(Number(value))}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select max notifications" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {Array.from({ length: 10 }, (_, i) => i + 1).map(
+                        (num) => (
+                          <SelectItem key={num} value={String(num)}>
+                            {num}
                           </SelectItem>
                         )
                       )}
