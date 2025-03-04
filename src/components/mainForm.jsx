@@ -15,6 +15,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Switch } from "./ui/switch";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -34,6 +35,7 @@ const formSchema = z.object({
   message: z.string().min(1, "Message cannot be empty"),
   duration: z.number().min(1).max(15),
   maxNotifications: z.number().min(1).max(10),
+  withActionButton: z.boolean(),
 });
 
 export default function MainForm() {
@@ -46,12 +48,14 @@ export default function MainForm() {
       message: "Hey! Welcome to NotiStack 🍞",
       duration: 5,
       maxNotifications: 5,
+      withActionButton: true,
     },
   });
 
-  const { addToast, setMaxNotifications } = useToast();
+  const { addToast, setMaxNotifications, useAction } = useToast();
 
   const onSubmit = (data) => {
+    console.log("data: ", data);
     setMaxNotifications(data.maxNotifications);
     addToast({
       variant: data.variant,
@@ -61,6 +65,11 @@ export default function MainForm() {
         horizontal: data.positionHorizontal,
       },
       duration: data.duration,
+      action: useAction(
+        "Retry",
+        () => alert("Retry action executed!"),
+        data.withActionButton
+      ),
     });
   };
 
@@ -229,6 +238,22 @@ export default function MainForm() {
                   </Select>
                 </FormControl>
                 <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="withActionButton"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Action Button</FormLabel>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
               </FormItem>
             )}
           />

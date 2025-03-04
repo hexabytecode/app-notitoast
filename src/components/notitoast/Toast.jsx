@@ -1,8 +1,9 @@
 import { X } from "lucide-react";
 import { motion } from "framer-motion";
 import { getAnimation, getVariantClass, getVariantIcon } from "./toastUtils";
+import { Button } from "../ui/button";
 
-const Toast = ({ variant, message, position, onClose }) => {
+const Toast = ({ variant, message, position, onClose, action }) => {
   return (
     <motion.div
       layout
@@ -16,9 +17,16 @@ const Toast = ({ variant, message, position, onClose }) => {
         {getVariantIcon(variant)}
         <span>{message}</span>
       </div>
-      <button onClick={onClose} className="text-xl">
-        <X />
-      </button>
+      <div className="flex items-center gap-2">
+        {action && (
+          <Button onClick={action.callback} variant="outline">
+            {action.label}
+          </Button>
+        )}
+        <Button onClick={onClose} variant="ghost" className="text-xl">
+          <X />
+        </Button>
+      </div>
     </motion.div>
   );
 };
