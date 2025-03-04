@@ -9,7 +9,14 @@ export const ToastProvider = ({ children }) => {
   const [toasts, setToasts] = useState([]);
 
   const addToast = (toast) => {
-    setToasts([...toasts, { id: Date.now(), ...toast }]);
+    const id = Date.now();
+    setToasts((prevToasts) => [{ id, ...toast }, ...prevToasts]);
+
+    if (toast.duration) {
+      setTimeout(() => {
+        removeToast(id);
+      }, toast.duration * 1000);
+    }
   };
 
   const removeToast = (id) => {

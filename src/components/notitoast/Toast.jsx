@@ -1,16 +1,8 @@
 import { X } from "lucide-react";
 import { motion } from "framer-motion";
 import { getAnimation, getVariantClass, getVariantIcon } from "./toastUtils";
-import { useEffect } from "react";
 
-const Toast = ({ variant, message, position, duration, onClose }) => {
-  useEffect(() => {
-    if (duration) {
-      const timer = setTimeout(onClose, duration * 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [duration, onClose]);
-
+const Toast = ({ variant, message, position, onClose }) => {
   return (
     <motion.div
       layout
