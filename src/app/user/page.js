@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import UserTable from "@/components/UserTable";
 import { useToast } from "@/components/notitoast/useToast";
+import { AnimatePresence } from "framer-motion";
 
 export default function User() {
   const [apiURL, setApiURL] = useState("");
@@ -20,7 +21,14 @@ export default function User() {
         horizontal: "right",
       },
       duration: 5,
-      action: useAction("Reset", () => setApiURL(""), true),
+      action: useAction(
+        "Use Example",
+        () => {
+          setApiURL("https://jsonplaceholder.typicode.com/users");
+          setUserData();
+        },
+        true
+      ),
     });
   };
 
@@ -33,7 +41,14 @@ export default function User() {
         horizontal: "right",
       },
       duration: 3,
-      action: useAction("Click me!", () => alert("I'm Happy!"), true),
+      action: useAction(
+        "Reset",
+        () => {
+          setApiURL("");
+          setUserData();
+        },
+        true
+      ),
     });
   };
 
@@ -61,7 +76,9 @@ export default function User() {
         />
         <Button onClick={sendAPI}>Send Request</Button>
       </div>
-      <UserTable users={userData} />
+      <AnimatePresence>
+        <UserTable users={userData} />
+      </AnimatePresence>
     </>
   );
 }
