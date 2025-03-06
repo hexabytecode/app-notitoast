@@ -52,7 +52,7 @@ export default function MainForm() {
     },
   });
 
-  const { addToast, setMaxNotifications, useAction } = useToast();
+  const { addToast, setMaxNotifications, acttion } = useToast();
 
   const onSubmit = (data) => {
     console.log("data: ", data);
@@ -65,7 +65,7 @@ export default function MainForm() {
         horizontal: data.positionHorizontal,
       },
       duration: data.duration,
-      action: useAction(
+      action: acttion(
         "Go to Google",
         () => alert("Retry action executed!"),
         data.withActionButton

@@ -27,14 +27,14 @@ export const ToastProvider = ({ children }) => {
     setToasts((prevToasts) => prevToasts.filter((toast) => toast.id !== id));
   };
 
-  const useAction = (label, callback, isEnabled) => {
+  const acttion = (label, callback, isEnabled) => {
     if (!isEnabled) return null;
     return { label, callback };
   };
 
   return (
     <ToastContext.Provider
-      value={{ addToast, removeToast, useAction, setMaxNotifications }}
+      value={{ addToast, removeToast, acttion, setMaxNotifications }}
     >
       {children}
       <ToastContainer toasts={toasts} removeToast={removeToast} />

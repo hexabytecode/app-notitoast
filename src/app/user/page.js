@@ -10,7 +10,7 @@ import { AnimatePresence } from "framer-motion";
 export default function User() {
   const [apiURL, setApiURL] = useState("");
   const [userData, setUserData] = useState();
-  const { addToast, useAction } = useToast();
+  const { addToast, acttion } = useToast();
 
   const errorNoti = () => {
     addToast({
@@ -21,7 +21,7 @@ export default function User() {
         horizontal: "right",
       },
       duration: 5,
-      action: useAction(
+      action: acttion(
         "Use Example",
         () => {
           setApiURL("https://jsonplaceholder.typicode.com/users");
@@ -41,7 +41,7 @@ export default function User() {
         horizontal: "right",
       },
       duration: 3,
-      action: useAction(
+      action: acttion(
         "Reset",
         () => {
           setApiURL("");
