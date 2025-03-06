@@ -12,6 +12,7 @@ export const metadata = {
       "NotiToast makes handling app notifications simple and elegant. Plug and play with customizable toasts!",
   },
 };
+import { ToastProvider } from "@/components/notitoast/ToastProvider";
 
 export default function RootLayout({ children }) {
   return (
@@ -19,7 +20,7 @@ export default function RootLayout({ children }) {
       <body
         className={`h-screen w-screen flex flex-col justify-center items-center`}
       >
-        {children}
+        <ToastProvider>{children}</ToastProvider>
       </body>
     </html>
   );

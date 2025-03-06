@@ -66,7 +66,7 @@ export default function MainForm() {
       },
       duration: data.duration,
       action: useAction(
-        "Retry",
+        "Go to Google",
         () => alert("Retry action executed!"),
         data.withActionButton
       ),
