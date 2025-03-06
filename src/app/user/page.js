@@ -14,19 +14,20 @@ export default function User() {
   const errorNoti = () => {
     addToast({
       variant: "failure",
-      message: "Fetch Data Failed",
+      message: "Enter a Valid URL",
       position: {
         vertical: "top",
         horizontal: "right",
       },
-      duration: 3,
+      duration: 5,
+      action: useAction("Reset", () => setApiURL(""), true),
     });
   };
 
   const successNoti = () => {
     addToast({
       variant: "success",
-      message: "Fetch Data successful!",
+      message: "User Data fetched!",
       position: {
         vertical: "top",
         horizontal: "right",
